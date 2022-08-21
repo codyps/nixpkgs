@@ -86,6 +86,7 @@
 , libogg ? null # Ogg container used by vorbis & theora
 , libopus ? null # Opus de/encoder
 , librsvg ? null # SVG protocol
+, rubberband ? null # time streching and pitch shifting
 , libssh ? null # SFTP protocol
 , libtheora ? null # Theora encoder
 , libv4l ? null # Video 4 Linux support
@@ -418,6 +419,7 @@ stdenv.mkDerivation rec {
     (enableFeature (isLinux && vulkan-loader != null) "vulkan")
     (enableFeature (isLinux && vulkan-loader != null && glslang != null) "libglslang")
     (enableFeature (samba != null && gplLicensing && version3Licensing) "libsmbclient")
+    (enableFeature (rubberband != null) "librubberband")
     #(enableFeature (zvbi != null && gplLicensing) "libzvbi")
     /*
      * Developer flags
@@ -440,7 +442,7 @@ stdenv.mkDerivation rec {
   buildInputs = [
     bzip2 celt dav1d fontconfig freetype frei0r fribidi game-music-emu gnutls gsm
     libjack2 ladspaH lame libaom libass libbluray libbs2b libcaca libdc1394 libmodplug libmysofa
-    libogg libopus librsvg libssh libtheora libvdpau libvorbis libvpx libwebp libX11
+    libogg libopus librsvg rubberband libssh libtheora libvdpau libvorbis libvpx libwebp libX11
     libxcb libXv libXext libxml2 xz openal ocl-icd opencl-headers openjpeg libpulseaudio rav1e svt-av1 rtmpdump opencore-amr
     samba SDL2 soxr speex srt vid-stab vo-amrwbenc x264 x265 xavs xvidcore
     zeromq4 zimg zlib openh264
