@@ -9,6 +9,11 @@ stdenv.mkDerivation rec {
   pname = "gcc-arm-embedded";
   version = "11.3.rel1";
 
+  # gdb also includes a "include/gdb/jit-reader.h" which conflicts with one
+  # shipped by this package. Prefer the gdb package over this one for that
+  # header.
+  priority = "6";
+
   platform = {
     aarch64-darwin = "darwin-x86_64";  # use intel binaries via rosetta
     aarch64-linux = "aarch64";
