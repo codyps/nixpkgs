@@ -45,6 +45,11 @@ rec {
     isM68k         = { cpu = { family = "m68k"; }; };
     isS390         = { cpu = { family = "s390"; }; };
     isJavaScript   = { cpu = cpuTypes.js; };
+    isEsp8266      = { cpu = { family = "esp8266"; }; };
+    isEsp32        = { cpu = { family = "esp32"; }; };
+    isEsp32s2      = { cpu = { family = "esp32s2"; }; };
+    isEsp32s3      = { cpu = { family = "esp32s3"; }; };
+    isEsp          = [ isEsp8266 isEsp32 isEsp32s2 isEsp32s3 ];
 
     is32bit        = { cpu = { bits = 32; }; };
     is64bit        = { cpu = { bits = 64; }; };

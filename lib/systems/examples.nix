@@ -221,6 +221,26 @@ rec {
     libc = "newlib";
   };
 
+  esp8266 = {
+    config = "xtensa-esp8266-elf";
+    libc = "newlib";
+  };
+
+  esp32 = {
+    config = "xtensa-esp32-elf";
+    libc = "newlib";
+  };
+
+  esp32s2 = {
+    config = "xtensa-esp32s2-elf";
+    libc = "newlib";
+  };
+
+  esp32s3 = {
+    config = "xtensa-esp32s3-elf";
+    libc = "newlib";
+  };
+
   #
   # Redox
   #

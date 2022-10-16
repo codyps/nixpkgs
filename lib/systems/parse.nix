@@ -124,6 +124,7 @@ rec {
     avr      = { bits = 8; family = "avr"; };
 
     vc4      = { bits = 32; significantByte = littleEndian; family = "vc4"; };
+    esp32s3  = { bits = 32; significantByte = littleEndian; family = "esp32s3"; };
 
     or1k     = { bits = 32; significantByte = bigEndian; family = "or1k"; };
 
@@ -419,7 +420,9 @@ rec {
         then { cpu = elemAt l 0; vendor = "unknown";  kernel = "none";     abi = elemAt l 1; }
       else   { cpu = elemAt l 0;                      kernel = elemAt l 1;                   };
     "3" = # Awkward hacks, beware!
-      if elemAt l 1 == "apple"
+      if (elemAt l 0 == "xtensa") && (elemAt l 2 == "elf")
+        then { cpu = elemAt l 1; kernel = "none"; vendor = "unknown"; }
+      else if elemAt l 1 == "apple"
         then { cpu = elemAt l 0; vendor = "apple";    kernel = elemAt l 2;                   }
       else if (elemAt l 1 == "linux") || (elemAt l 2 == "gnu")
         then { cpu = elemAt l 0;                      kernel = elemAt l 1; abi = elemAt l 2; }

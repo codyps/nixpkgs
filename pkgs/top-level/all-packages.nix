@@ -15909,6 +15909,8 @@ with pkgs;
 
   or1k-newlib = callPackage ../development/misc/or1k/newlib.nix {};
 
+  esp-newlib = callPackage ../development/misc/esp/newlib.nix {};
+
   rappel = callPackage ../development/misc/rappel { };
 
   pharo-vms = callPackage ../development/pharo/vm { };
@@ -18791,6 +18793,7 @@ with pkgs;
     else if name == "newlib" && stdenv.targetPlatform.isMsp430 then targetPackages.msp430NewlibCross or msp430NewlibCross
     else if name == "newlib" && stdenv.targetPlatform.isVc4 then targetPackages.vc4-newlib or vc4-newlib
     else if name == "newlib" && stdenv.targetPlatform.isOr1k then targetPackages.or1k-newlib or or1k-newlib
+    else if name == "newlib" && stdenv.targetPlatform.isEsp then targetPackages.esp-newlib or esp-newlib
     else if name == "newlib" then targetPackages.newlibCross or newlibCross
     else if name == "newlib-nano" then targetPackages.newlib-nanoCross or newlib-nanoCross
     else if name == "musl" then targetPackages.muslCross or muslCross

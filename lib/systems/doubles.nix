@@ -44,6 +44,7 @@ let
     "microblaze-none" "microblazeel-none" "msp430-none" "or1k-none" "m68k-none"
     "powerpc-none" "powerpcle-none" "riscv32-none" "riscv64-none" "rx-none"
     "s390-none" "s390x-none" "vc4-none" "x86_64-none"
+    "esp8266-none" "esp32-none" "esp32s2-none" "esp32s3-none"
 
     # OpenBSD
     "i686-openbsd" "x86_64-openbsd"
@@ -84,6 +85,10 @@ in {
   m68k          = filterDoubles predicates.isM68k;
   s390          = filterDoubles predicates.isS390;
   js            = filterDoubles predicates.isJavaScript;
+  esp8266       = filterDoubles predicates.isEsp8266;
+  esp32         = filterDoubles predicates.isEsp32;
+  esp32s2       = filterDoubles predicates.isEsp32s2;
+  esp32s3       = filterDoubles predicates.isEsp32s3;
 
   bigEndian     = filterDoubles predicates.isBigEndian;
   littleEndian  = filterDoubles predicates.isLittleEndian;
