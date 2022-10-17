@@ -90,12 +90,27 @@ stdenv.mkDerivation ({
 
   builder = ../builder.sh;
 
-  src = fetchurl {
-    url = "mirror://gcc/releases/gcc-${version}/gcc-${version}.tar.xz";
-    sha256 = if stdenv.isDarwin
+  srcs = lib.optionsls (!stdenv.isEsp) [
+    fetchurl {
+      url = "mirror://gcc/releases/gcc-${version}/gcc-${version}.tar.xz";
+      sha256 = if stdenv.isDarwin
       then "sha256-0I7cU2tUw3KhAQ/2YZ3SdMDxYDqkkhK6IPeqLNo2+os="
       else "sha256-tHzygYaR9bHiHfK7OMeV+sLPvWQO3i0KXhyJ4zijrDk=";
-  };
+    }
+  ] ++ lib.optionals stdenv.isEsp [
+    fetchFromGitHub {
+      owner = "espressif";
+      repo = "gcc";
+      rev = "dfc1a5f136a3996e8b90eaf7396382e9f0f13ee7";
+      sha256 = lib.fakeSha256;
+    },
+    fetchFromGitHub {
+      owner = "espressif";
+      repo = "xtensa-overlays";
+      rev = "dd1cf19f6eb327a9db51043439974a6de13f5c7f";
+      sha256 = lib.fakeSha256;
+    },
+  ];
 
   inherit patches;
 
