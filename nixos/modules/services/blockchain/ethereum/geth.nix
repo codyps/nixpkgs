@@ -17,6 +17,15 @@ let
         description = "Port number Go Ethereum will be listening on, both TCP and UDP.";
       };
 
+      ipc = {
+        enable = lib.mkEnableOption "Go Ethereum Unix Socket IPC";
+        path = mkOption {
+          type = types.str;
+          default = "";
+          description = "Filename for IPC socket/pipe. Relative to the dataDir";
+        };
+      };
+
       http = {
         enable = lib.mkEnableOption "Go Ethereum HTTP API";
         address = mkOption {
@@ -185,7 +194,8 @@ in
       script = ''
         ${cfg.package}/bin/geth \
           --nousb \
-          --ipcdisable \
+          ${optionalString (!cfg.ipc.enable) ''--ipcdisable''} \
+          ${optionalString (cfg.ipc.path != "") ''--ipcpath ${cfg.ipc.path}''} \
           ${optionalString (cfg.network != null) ''--${cfg.network}''} \
           --syncmode ${cfg.syncmode} \
           --gcmode ${cfg.gcmode} \
